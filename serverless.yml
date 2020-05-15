@@ -1,0 +1,49 @@
+service: tesseract-aws-lambda
+
+provider:
+  name: aws
+  runtime: python3.7
+
+package:
+  exclude:
+    - .idea/**
+    - __pycache__/**
+    - .pytest_cache/**
+    - tesseract/**
+    - venv/**
+    - build_tesseract.sh
+    - Dockerfile
+    - lambda_event.json
+    - requirements.txt
+    - serverless.yml
+    - test.jpg
+    - test_handler.py
+    - use_ocr_as_a_service.py
+    - layer/**
+
+layers:
+  OCR:
+    path: layer
+    name: ocr-layer
+    description: Layer with Tesseract
+    compatibleRuntimes:
+      - python3.7
+    retain: false
+    package:
+      include:
+        - layer/**
+
+functions:
+  ocr:
+    handler: handler.ocr
+    memorySize: 3008
+    timeout: 15
+    layers:
+      - {Ref: OCRLambdaLayer}
+    events:
+      - http:
+          path: ocr
+          method: post
+    package:
+      include:
+        - handler.py
