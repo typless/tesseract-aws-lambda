@@ -1,8 +1,10 @@
 service: tesseract-aws-lambda
 
+frameworkVersion: '3'
+
 provider:
   name: aws
-  runtime: python3.7
+  runtime: python3.9
 
 package:
   exclude:
@@ -19,7 +21,6 @@ package:
     - test.jpg
     - test_handler.py
     - use_ocr_as_a_service.py
-    - layer/**
 
 layers:
   OCR:
@@ -27,7 +28,7 @@ layers:
     name: ocr-layer
     description: Layer with Tesseract
     compatibleRuntimes:
-      - python3.7
+      - python3.9
     retain: false
     package:
       include:
