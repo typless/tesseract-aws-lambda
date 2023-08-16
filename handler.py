@@ -9,7 +9,7 @@ from PIL import Image
 if os.getenv('AWS_EXECUTION_ENV') is not None:
     os.environ['LD_LIBRARY_PATH'] = '/opt/lib'
     os.environ['TESSDATA_PREFIX'] = '/opt/tessdata'
-    pytesseract.pytesseract.tesseract_cmd = '/opt/tesseract'
+    pytesseract.pytesseract.tesseract_cmd = '/opt/bin/tesseract'
 
 
 def ocr(event, context):
