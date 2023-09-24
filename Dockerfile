@@ -15,4 +15,7 @@ RUN cd autoconf-archive-2019.01.06 && cp m4/* /usr/share/aclocal/
 
 COPY build_tesseract.sh /tmp/build_tesseract.sh
 RUN chmod +x /tmp/build_tesseract.sh
+
+# use ENTRYPOINT
+# ENTRYPOINT ["/tmp/build_tesseract.sh"]
 CMD sh /tmp/build_tesseract.sh
